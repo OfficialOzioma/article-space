@@ -63,7 +63,7 @@ class AuthController extends Controller
         $user = $this->create($data);
 
         Auth::login($user);
-        $url = 'profile/' . Auth::user()->id;
+        $url = 'profile/' . Auth::user()->username;
         return redirect($url)->withSuccess('Welcome');
     }
 

@@ -69,8 +69,8 @@ class AuthController extends Controller
 
         //create a settings for this user.
         $settings->user_id = Auth::user()->id;
-        $settings->profile_pic = "default/user_icon2.jpg";
-        $settings->bio = "";
+        $settings->profile_pic = '/default/user_icon2.jpg';
+        $settings->bio = '';
         $settings->save();
 
         $url = 'profile/' . Auth::user()->username;

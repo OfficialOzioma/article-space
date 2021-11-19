@@ -44,10 +44,6 @@ class ProfileSettingsController extends Controller
             $request->thumbnail->move(public_path($path), $filename);
             $profilePicture = Auth::user()->username . '/' . $filename;
             $settings->profile_pic = $profilePicture;
-        } else {
-            $defaultImagePath = 'uploads/profile_pictures/default';
-            $defaultImage = $defaultImagePath . '/' . 'user_icon2.jpg';
-            $data['profile_pic'] = $defaultImage;
         }
 
         $settings->bio = $request->bio;

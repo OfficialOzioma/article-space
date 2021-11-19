@@ -13,9 +13,21 @@
 ### ✨ [Demo](https://articlespace.herokuapp.com)
 
 ## Install
+> You can install the laravel project on your local machine
+> make sure you have composer, php npm, and postgres database installed
+> follow the instructions below to install on your local machine.
 
 ```sh
 git clone git@github.com:OfficialOzioma/article-space.git
+```
+```sh
+composer install
+```
+```sh
+npm install
+```
+```sh
+cp .env.example .env
 ```
 
 ## Usage

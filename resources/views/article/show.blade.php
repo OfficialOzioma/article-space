@@ -36,7 +36,7 @@
                             <div class="single-post">
                                 <div class="feature-img">
                                     <img class="img-fluid"
-                                        src="{{ url('uploads/thumbnails', $findArticle->thumbnail) }}">
+                                        src="{{ url('uploads/thumbnails/'. $findArticle->thumbnail) }}">
                                 </div>
                                 <div class="blog_details">
                                     <h2>
@@ -227,7 +227,7 @@
                             <div class="blog_right_sidebar">
                                 <aside class="single_sidebar_widget search_widget">
                                     <div class="card" style="width: 18rem;">
-                                        <img src="{{ url('uploads/profile_pictures', $settings->profile_pic) }}"
+                                        <img src="{{ url('uploads/profile_pictures/'. $settings->profile_pic) }}"
                                             class="card-img-top img-fluid rounded-start" alt="..." style="heigh:auto;">
                                         <div class="card-body align-items-center">
                                             <div class="ml-3 w-100">

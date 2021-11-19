@@ -95,7 +95,7 @@
                             <div class="col-lg-4 col-md-12 mb-4 d-flex align-items-stretch">
                                 <div class="card border border-1">
                                     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                                        <img src="{{ url('uploads/thumbnails', $article->thumbnail) }}"
+                                        <img src="{{ url('uploads/thumbnails/' . $article->thumbnail) }}"
                                             class="img-fluid" />
                                         <a href="#!">
                                             <div class="mask"

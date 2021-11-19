@@ -17,7 +17,7 @@
                         <div class="col d-flex align-items-stretch">
                             <div class="card shadow-sm">
 
-                                <img src="{{ url('uploads/thumbnails', $trend->thumbnail) }}" class="img-fluid" alt=""
+                                <img src="{{ url('uploads/thumbnails/'. $trend->thumbnail) }}" class="img-fluid" alt=""
                                     sizes="" srcset="" />
                                 <div class="card-body d-flex flex-column">
                                     <hr />

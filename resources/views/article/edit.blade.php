@@ -43,7 +43,7 @@
 
                         <div class="form-group">
                             <h5>Add display picture </h5>
-                            <img id="output" src="{{ url('uploads/thumbnails', $article->thumbnail) }}" width="400"
+                            <img id="output" src="{{ url('uploads/thumbnails/'. $article->thumbnail) }}" width="400"
                                 height="400" class=" d-flex mb-3" />
                             <input class="form-control form-control-lg mb-3" name="thumbnail" accept="image/*"
                                 id="formFileLg" type="file"

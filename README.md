@@ -6,23 +6,64 @@
   </a>
 </p>
 
-> Article Space is website for writing articles and blog
+> Article Space is website for writing articles and blog, This website was build with laravel 8, Javascript, Bootstrap 5
 
 ### 🏠 [Homepage](https://articlespace.herokuapp.com)
 
 ### ✨ [Demo](https://articlespace.herokuapp.com)
 
 ## Install
+> You can install the laravel project on your local machine
+> make sure you have composer, php npm, and postgres database installed
+> follow the instructions below to install on your local machine.
 
 ```sh
 git clone git@github.com:OfficialOzioma/article-space.git
 ```
-
-## Usage
-
 ```sh
-git clone git@github.com:OfficialOzioma/article-space.git 
+composer install
 ```
+```sh
+npm install
+```
+```sh
+cp .env.example .env
+```
+```sh
+Fill your database details
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=YOUR-DATABASE-NAME
+DB_USERNAME=YOUR-DATABASE-USERNAME
+DB_PASSWORD=YOUR-DATABASE-PASSWORD
+```
+```sh
+php artisan migrate
+```
+```sh
+php artisan serve
+```
+
+## screenshot
+
+![Screenshot from 2021-11-19 02-18-56](https://user-images.githubusercontent.com/28990981/142532042-a8797d99-fef8-4d53-adc3-f44dc8da44e6.png)
+Landing page
+
+![login](https://user-images.githubusercontent.com/28990981/142539236-69f7022b-3c97-49bd-a0ec-ab6e7072fd47.png)
+Login page
+
+![register](https://user-images.githubusercontent.com/28990981/142539820-9d37457c-bda9-4ebc-bd4f-2399892cdeba.png)
+Registration Page
+
+![home page](https://user-images.githubusercontent.com/28990981/142539697-ff7108be-f8c3-43c5-b59d-a22cec84fbcf.png)
+Home Page
+
+![profile](https://user-images.githubusercontent.com/28990981/142539798-8524d05f-e38e-43c2-8fb6-eea7f75f74b6.png)
+Profile Page
+
+
+
 
 ## Author
 

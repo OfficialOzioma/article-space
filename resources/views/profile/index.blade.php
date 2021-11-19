@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    MyBook-Profile
+    Profile
 @endsection
 
 @section('style')
@@ -100,10 +100,10 @@
 
                     @if (!empty($user->settings))
                         <img class="rounded-circle mt-5" width="250px" class="img-fluid rounded-circle btn-img img-responsive"
-                            src="{{ url('uploads/profile_pictures', $user->settings->profile_pic) }}">
+                            src="{{ url('uploads/profile_pictures/', $user->settings->profile_pic) }}">
                     @else
                         <img class="rounded-circle mt-5" width="250px" class="img-fluid rounded-circle btn-img img-responsive"
-                            src="{{ url('uploads/profile_pictures/default/user_icon2.jpg') }}">
+                            src="{{ asset('uploads/profile_pictures/default/user_icon2.jpg') }}">
                     @endif
                 </div>
 

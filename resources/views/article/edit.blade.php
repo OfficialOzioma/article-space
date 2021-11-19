@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    MyBook-Edit Article
+    Edit Article
 @endsection
 
 @section('content')

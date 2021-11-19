@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Article Space
+    Article Space - featured
 @endsection
 
 @section('content')

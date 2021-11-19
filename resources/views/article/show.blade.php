@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    show
+    show Articles
 @endsection
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -226,57 +226,6 @@
                         <div class="col-lg-4">
                             <div class="blog_right_sidebar">
                                 <aside class="single_sidebar_widget search_widget">
-
-                                    {{-- <div class="card mb-3" style="max-width: 540px;">
-                                        <div class="row g-0">
-                                            <div class="col-md-4">
-                                                <img src="{{ url('uploads/profile_pictures', $settings->profile_pic) }}"
-                                                    class="img-fluid rounded-start" alt="..." style="heigh:auto;">
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">{{ $findArticle->user->name }}</h5>
-                                                    <p class="card-text">{{ $settings->bio }}</p>
-                                                    <p class="card-text">
-                                                        <small class="text-muted">
-
-                                                        </small>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
-                                    {{-- <div class="container mt-5 d-flex justify-content-center">
-                                        <div class="card p-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="image">
-                                                    <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80"
-                                                        class="rounded" width="155">
-
-                                                </div>
-                                                <div class="ml-3 w-100">
-                                                    <h4 class="mb-0 mt-0">Alex Morrision</h4> <span>Senior
-                                                        Journalist</span>
-                                                    <div
-                                                        class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
-                                                        <div class="d-flex flex-column"> <span
-                                                                class="articles">Articles</span> <span
-                                                                class="number1">38</span> </div>
-                                                        <div class="d-flex flex-column"> <span
-                                                                class="followers">Followers</span> <span
-                                                                class="number2">980</span> </div>
-                                                        <div class="d-flex flex-column"> <span
-                                                                class="rating">Rating</span> <span
-                                                                class="number3">8.9</span> </div>
-                                                    </div>
-                                                    <div class="button mt-2 d-flex flex-row align-items-center"> <button
-                                                            class="btn btn-sm btn-outline-primary w-100">Chat</button>
-                                                        <button class="btn btn-sm btn-primary w-100 ml-2">Follow</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
                                     <div class="card" style="width: 18rem;">
                                         <img src="{{ url('uploads/profile_pictures', $settings->profile_pic) }}"
                                             class="card-img-top img-fluid rounded-start" alt="..." style="heigh:auto;">

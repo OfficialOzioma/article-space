@@ -16,6 +16,18 @@ class Like extends Model
      */
     protected $fillable = ['user_id', 'article_id'];
 
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'user_id' => 'string',
+        'article_id' => 'string',
+    ];
+
+
     /**
      *
      * Get the Article that owns the Like.

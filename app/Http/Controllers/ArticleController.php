@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\Article;
 use App\Models\View;
+use App\Models\Settings;
+
 
 class ArticleController extends Controller
 {
@@ -105,12 +107,12 @@ class ArticleController extends Controller
         $findArticle = Article::where('id', $article->id)
             ->with(['user', 'comments', 'like'])
             ->firstOrFail();
+        $settings = Settings::find($findArticle->user->id);
+
         $numberOfComments = $findArticle->comments->count();
         $this->addView($article->id, Auth::user()->id);
 
-        // dd($findArticle);
-
-        return view('article.show', compact('findArticle', 'numberOfComments'));
+        return view('article.show', compact('findArticle', 'numberOfComments', 'settings'));
     }
 
     /**
@@ -140,7 +142,7 @@ class ArticleController extends Controller
         $request->validate([
             'title' => 'required|string|max:100',
             'summary' => 'required|max:200|min:3',
-            'thumbnail' => '|image|mimes:jpeg,png,jpg,gif,svg|max:4048',
+            'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4048',
             'editor' => 'required',
         ]);
 

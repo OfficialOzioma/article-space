@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Settings;
 
 class AuthController extends Controller
 {
@@ -50,6 +51,8 @@ class AuthController extends Controller
 
     public function registration(Request $request)
     {
+        $settings = new Settings();
+
         $request->validate([
             'name' => 'required|min:3|string',
             'email' => 'required|email|unique:users',
@@ -63,6 +66,13 @@ class AuthController extends Controller
         $user = $this->create($data);
 
         Auth::login($user);
+
+        //create a settings for this user.
+        $settings->user_id = Auth::user()->id;
+        $settings->profile_pic = "default/user_icon2.jpg";
+        $settings->bio = "";
+        $settings->save();
+
         $url = 'profile/' . Auth::user()->username;
         return redirect($url)->withSuccess('Welcome');
     }

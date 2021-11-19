@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    MyBook-Home
+    Article Space - Home
 @endsection
 
 @section('content')

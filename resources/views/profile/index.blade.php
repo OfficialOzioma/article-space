@@ -100,7 +100,7 @@
 
                     @if (!empty($user->settings))
                         <img class="rounded-circle mt-5" width="250px" class="img-fluid rounded-circle btn-img img-responsive"
-                            src="{{ url('uploads/profile_pictures' . $user->settings->profile_pic) }}">
+                            src="{{ url('uploads/profile_pictures/' . $user->settings->profile_pic) }}">
                     @else
                         <img class="rounded-circle mt-5" width="250px" class="img-fluid rounded-circle btn-img img-responsive"
                             src="{{ asset('uploads/profile_pictures/default/user_icon2.jpg') }}">
@@ -246,7 +246,7 @@
                                     <div class="col-lg-4 col-md-12 mb-4 d-flex align-items-stretch">
                                         <div class="card border border-1">
                                             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                                                <img src="{{ url('uploads/thumbnails', $article->thumbnail) }}"
+                                                <img src="{{ url('uploads/thumbnails/'.$article->thumbnail) }}"
                                                     class="img-fluid" />
                                                 <a href="#!">
                                                     <div class="mask"

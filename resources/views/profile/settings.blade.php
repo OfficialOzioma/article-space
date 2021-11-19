@@ -26,7 +26,7 @@
                     @if (!empty($user->settings))
 
                         <img class="rounded-circle mt-5" width="150px"
-                            src="{{ url('uploads/profile_pictures', $user->settings->profile_pic) }}">
+                            src="{{ url('uploads/profile_pictures/'. $user->settings->profile_pic) }}">
                     @else
                         <img class="rounded-circle mt-5" width="150px"
                             src="{{ url('uploads/profile_pictures/default/user_icon2.jpg') }}">

@@ -2,7 +2,7 @@
 
 
 @section('title')
-    MyBook-Registration
+    Registration
 @endsection
 
 @section('content')

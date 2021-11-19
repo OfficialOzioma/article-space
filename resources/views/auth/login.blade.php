@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('title')
-    MyBook-Login
+    Login
 @endsection
 
 @section('content')

@@ -95,18 +95,16 @@
 
     <div class="container mt-5 mb-4 p-3 d-flex justify-content-center">
         <div class="card p-4">
-            <div class="mb-3">
-                <button class="btn btn-outline-success btn-lg">
-                    <span class=" float-right">
-                        <i class="fa fa-cog"></i> Profile settings
-                    </span>
-                </button>
-
-            </div>
             <div class=" image d-flex flex-column justify-content-center align-items-center">
-                <div class="border border-danger rounded-circle">
-                    <img src="{{ asset('images/work-3.jpg') }}" width="250px"
-                        class="img-fluid rounded-circle btn-img img-responsive" />
+                <div class="">
+
+                    @if (!empty($user->settings))
+                        <img class="rounded-circle mt-5" width="250px" class="img-fluid rounded-circle btn-img img-responsive"
+                            src="{{ url('uploads/profile_pictures', $user->settings->profile_pic) }}">
+                    @else
+                        <img class="rounded-circle mt-5" width="250px" class="img-fluid rounded-circle btn-img img-responsive"
+                            src="{{ url('uploads/profile_pictures/default/user_icon2.jpg') }}">
+                    @endif
                 </div>
 
                 <span class="name mt-3">
@@ -120,36 +118,27 @@
                     </h5>
                 </span>
 
-                <div class="d-flex flex-row justify-content-center align-items-center mt-3">
-                    <div class="row">
-                        <div class="col-4 ml-md-5 ml-sm-5">
-                            <div class="btn-group-vertical" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-info">Following</button>
-                                <button type="button" class="btn btn-outline-success">
-                                    <strong>{{ $user->followings()->get()->count() }} </strong>
-                                </button>
-                            </div>
-
+                <div class="d-flex justify-content-between align-items-center mt-4 px-4">
+                    <div class="row text-center m-t-20">
+                        <div class="col-lg-4 col-md-4 m-t-20">
+                            <button type="button" class="btn btn-outline-primary mb-2">
+                                Followings
+                                <span
+                                    class="badge rounded-pill bg-success">{{ $user->followings()->get()->count() }}</span>
+                            </button>
                         </div>
-                        <div class="col-4  ml-md-5 ml-sm-5">
-                            <div class="btn-group-vertical" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-primary ">Followers</button>
-                                <button type="button" class="btn btn-outline-primary text-bold">
-                                    <h6 class="tl-follower">
-                                        {{ $user->followers()->get()->count() }}
-                                    </h6>
-
-                                </button>
-                            </div>
+                        <div class="col-lg-4 col-md-4 m-t-20">
+                            <button type="button" class="btn btn-outline-primary mb-2">
+                                Followers <br>
+                                <span
+                                    class="badge rounded-pill bg-success">{{ $user->followers()->get()->count() }}</span>
+                            </button>
                         </div>
-                        <div class="col-4  ml-md-5 ml-sm-5">
-                            <div class="btn-group-vertical" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-success"> Articles</button>
-                                <button type="button" class="btn btn-outline-primary text-bold">
-                                    <strong>{{ $articlesCount }} </strong>
-                                </button>
-                            </div>
-
+                        <div class="col-lg-4 col-md-4 m-t-20">
+                            <button type="button" class="btn btn-outline-primary">
+                                Articles
+                                <span class="badge rounded-pill bg-success">{{ $articlesCount }}</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -157,14 +146,17 @@
                     <div class=" p-3">
 
                         @if ($the_authicated_User == true)
-                            <form action="#" method="post">
-                                <button class="btn btn-outline-secondary btn-lg">Edit Profile</button>
-                            </form>
+                            <a href="{{ route('profile.settings', $user->username) }}">
+                                <button class="btn btn-outline-secondary ">
+                                    Edit Profile
+                                </button>
+                            </a>
+
                         @else
                             {{-- <form action="{{ route('follow') }}" method="post"> --}}
                             {{-- @csrf --}}
                             {{-- <input type="hidden" name="user_id" value="{{ $user->id }}" id="id"> --}}
-                            <button class="btn btn-outline-secondary btn-lg action-follow" data-id="{{ $user->id }}">
+                            <button class="btn btn-outline-secondary  action-follow" data-id="{{ $user->id }}">
                                 <strong>
                                     @if (auth()->user()->isFollowing($user))
                                         UnFollow
@@ -178,19 +170,23 @@
 
                         @endif
 
-
-
                     </div>
                     <div class=" p-3">
-                        <button class="btn btn-outline-success btn-lg float-right">
+                        {{-- <button class="btn btn-outline-success float-right">
                             <i class="fa fa-envelope" aria-hidden="true"></i> message
+                        </button> --}}
+                        <button type="button" class="btn btn-outline-success position-relative">
+                            <i class="fa fa-envelope" aria-hidden="true"></i> Chat
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                0
+                                <span class="visually-hidden">unread messages</span>
+                            </span>
                         </button>
                     </div>
                 </div>
                 <div class="text mt-3 w-responsive border border-5 p-2">
                     <span class=" p-2">
-                        Eleanor Pena is a creator of minimalistic x bold graphics and digital
-                        artwork. Artist/ Creative Director by Day #NFT minting@ with FND night.
+                        {{ $user->settings->bio ?? '' }}
                     </span>
                 </div>
                 <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
@@ -199,9 +195,12 @@
                     <span><i class="fa fa-instagram"></i></span>
                     <span><i class="fa fa-linkedin"></i></span>
                 </div>
-                <div class=" px-2 rounded mt-4 date bg-info">
-                    <span class="join">Joined May,2021</span>
+                <div class=" px-2 rounded date bg-success text-white">
+                    <span class="join">
+                        <h5> {{ $user->created_at->format('M d, Y') }}</h5>
+                    </span>
                 </div>
+
             </div>
         </div>
     </div>

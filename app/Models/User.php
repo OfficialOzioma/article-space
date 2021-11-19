@@ -13,6 +13,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, Followable;
 
+    public $keyType = 'int';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -34,6 +36,8 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'user_id' => 'int',
+        'article_id' => 'int',
     ];
 
     /**
@@ -76,5 +80,13 @@ class User extends Authenticatable
     public function view()
     {
         return $this->hasMany(View::class);
+    }
+
+    /**
+     * Get the settings associated with the user.
+     */
+    public function settings()
+    {
+        return $this->hasOne(Settings::class, 'user_id');
     }
 }

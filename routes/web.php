@@ -9,6 +9,10 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\ProfileSettingsController;
+use App\Http\Controllers\FeaturedController;
+use App\Http\Controllers\TrendingController;
+use App\Http\Controllers\WritersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +26,7 @@ use App\Http\Controllers\FollowController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -41,6 +45,21 @@ Route::get('/profile/{username}', [UserController::class, 'index'])->name(
     'profile'
 );
 
+Route::get('/profile/edit/{username}', [
+    ProfileSettingsController::class,
+    'index',
+])->name('profile.settings');
+
+Route::put('/profile/update/{username}', [
+    ProfileSettingsController::class,
+    'saveSetting',
+])->name('profile.update');
+
+Route::post('/profile/password/{username}', [
+    ProfileSettingsController::class,
+    'changePassword',
+])->name('profile.password.update');
+
 Route::resource('/article', ArticleController::class);
 Route::post('/upload', [ImageController::class, 'upload'])->name('uplaod');
 Route::post('/comment/{id}', [CommentController::class, 'addComment'])->name(
@@ -50,5 +69,11 @@ Route::post('/like/{id}', [LikeController::class, 'like'])->name('like');
 Route::post('/follow', [FollowController::class, 'followUserRequest'])->name(
     'follow'
 );
+
+Route::get('/featured', [FeaturedController::class, 'index'])->name('featured');
+
+Route::get('/trending', [TrendingController::class, 'index'])->name('trending');
+
+// Route::get('/writers', [WritersController::class, 'index'])->name('writer');
 
 // Route::get('/user/{id}', [UserController::class, 'show']);

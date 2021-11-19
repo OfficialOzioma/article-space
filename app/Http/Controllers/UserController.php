@@ -21,16 +21,17 @@ class UserController extends Controller
      */
     public function index($username)
     {
-        $user = User::where('username', $username)->first();
-        // dd(!empty($user));
+        $user = User::where('username', $username)->with('settings')->first();
+        // dd($user);
         if (!empty($user)) {
             $articles = Article::where('user_id', $user->id)
-                ->with(['user', 'like', 'view'])
+                ->with(['like', 'view'])
                 ->orderBy('created_at', 'desc')
                 ->limit(3)
                 ->get();
-            $articlesCount = Article::where('user_id', $user->id)->count();
-            // dd($articlesCount);
+
+            $articlesCount = $articles->count();
+
             $the_authicated_User = Auth::user()->username == $username;
 
             return view(

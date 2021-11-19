@@ -11,6 +11,8 @@ class Article extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
+    public $keyType = 'string';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -23,6 +25,16 @@ class Article extends Model implements HasMedia
         'thumbnail',
         'visibility',
         'article',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'user_id' => 'string',
+        'article_id' => 'int',
     ];
 
     /**
@@ -53,7 +65,7 @@ class Article extends Model implements HasMedia
      */
     public function like()
     {
-        return $this->hasMany(Like::class);
+        return $this->hasMany(Like::class, 'article_id');
     }
 
     /**

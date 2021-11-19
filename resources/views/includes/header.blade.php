@@ -51,17 +51,19 @@
             class="d-flex flex-wrap align-items-center justify-content-center py-3 mb-5 border-bottom fixed-top bg-white">
             <a href="/" class="d-flex align-items-center col-md-3 mb-2 ml-5 mb-md-0 text-dark text-decoration-none">
                 <span class="text-capitalize">
-                    <h1>MyBook</h1>
+                    <h2>Article Space</h2>
                 </span>
             </a>
 
-            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 mr-5">
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 mr-5" style=" margin-right: 4%">
                 <li><a href="/home" class="nav-link px-2 link-secondary">Home</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">Trending</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">Featured</a></li>
-                <li><a href="{{ route('profile', auth()->user()->username) }}"
-                        class="nav-link px-2 link-dark">Publish</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">Authors</a></li>
+                <li><a href="{{ route('trending') }}" class="nav-link px-2 link-dark">Trending</a></li>
+                <li><a href="{{ route('featured') }}" class="nav-link px-2 link-dark">Featured</a></li>
+                <li>
+                    <a href="{{ route('profile', auth()->user()->username) }}"
+                        class="nav-link px-2 link-dark">Publish</a>
+                </li>
+                {{-- <li><a href="{{ route('writer') }}" class="nav-link px-2 link-dark">Writers</a></li> --}}
             </ul>
             @guest
                 <div class="col-md-3 text-end align-content-center mr-5 mt-md-1 m">

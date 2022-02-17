@@ -118,72 +118,8 @@
                     </h5>
                 </span>
 
-                <div class="d-flex justify-content-between align-items-center mt-4 px-4">
-                    <div class="row text-center m-t-20">
-                        <div class="col-lg-4 col-md-4 m-t-20">
-                            <button type="button" class="btn btn-outline-primary mb-2">
-                                Followings
-                                <span
-                                    class="badge rounded-pill bg-success">{{ $user->followings()->get()->count() }}</span>
-                            </button>
-                        </div>
-                        <div class="col-lg-4 col-md-4 m-t-20">
-                            <button type="button" class="btn btn-outline-primary mb-2">
-                                Followers <br>
-                                <span
-                                    class="badge rounded-pill bg-success">{{ $user->followers()->get()->count() }}</span>
-                            </button>
-                        </div>
-                        <div class="col-lg-4 col-md-4 m-t-20">
-                            <button type="button" class="btn btn-outline-primary">
-                                Articles
-                                <span class="badge rounded-pill bg-success">{{ $articlesCount }}</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-flex mt-4">
-                    <div class=" p-3">
+                @livewire('follow', ['username' => request()->route()->username])
 
-                        @if ($the_authicated_User == true)
-                            <a href="{{ route('profile.settings', $user->username) }}">
-                                <button class="btn btn-outline-secondary ">
-                                    Edit Profile
-                                </button>
-                            </a>
-
-                        @else
-                            {{-- <form action="{{ route('follow') }}" method="post"> --}}
-                            {{-- @csrf --}}
-                            {{-- <input type="hidden" name="user_id" value="{{ $user->id }}" id="id"> --}}
-                            <button class="btn btn-outline-secondary  action-follow" data-id="{{ $user->id }}">
-                                <strong>
-                                    @if (auth()->user()->isFollowing($user))
-                                        UnFollow
-                                    @else
-                                        Follow
-                                    @endif
-                                </strong>
-
-                            </button>
-                            {{-- </form> --}}
-
-                        @endif
-
-                    </div>
-                    <div class=" p-3">
-                        {{-- <button class="btn btn-outline-success float-right">
-                            <i class="fa fa-envelope" aria-hidden="true"></i> message
-                        </button> --}}
-                        <button type="button" class="btn btn-outline-success position-relative">
-                            <i class="fa fa-envelope" aria-hidden="true"></i> Chat
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                0
-                                <span class="visually-hidden">unread messages</span>
-                            </span>
-                        </button>
-                    </div>
-                </div>
                 <div class="text mt-3 w-responsive border border-5 p-2">
                     <span class=" p-2">
                         {{ $user->settings->bio ?? '' }}
@@ -246,7 +182,7 @@
                                     <div class="col-lg-4 col-md-12 mb-4 d-flex align-items-stretch">
                                         <div class="card border border-1">
                                             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                                                <img src="{{ url('uploads/thumbnails/'.$article->thumbnail) }}"
+                                                <img src="{{ url('uploads/thumbnails/' . $article->thumbnail) }}"
                                                     class="img-fluid" />
                                                 <a href="#!">
                                                     <div class="mask"
@@ -256,29 +192,41 @@
                                             </div>
                                             <div class="card-body d-flex flex-column">
                                                 <h5 class="card-title text-primary text-capitalize text-bold ">
-                                                    <a href="{{ route('article.show', $article->id) }}" target="_blank"
+                                                    <a href="{{ route('article.show', $article->slug) }}" target="_blank"
                                                         rel="noopener noreferrer" class=" text-decoration-none">
-                                                        {{ $article->title }}
+                                                        <p class="h5 text-dark text-left">
+                                                            {{ Str::limit($article->title, 70, '...') }}</p>
                                                     </a>
+
                                                 </h5>
                                                 <hr>
                                                 <p class="card-text">
                                                     <span class="text-justify">
-
-                                                        {{ $article->summary }}
+                                                        <small class="text-muted">
+                                                            {!! Str::limit($article->article, 200, '...') !!}
+                                                            <a href="{{ route('article.show', $article->slug) }}"
+                                                                class="text-black-50 text-decoration-none text-bold">
+                                                                <strong>read more</strong>
+                                                            </a>
+                                                        </small>
                                                     </span>
                                                     <br />
-                                                    <a href="{{ route('article.show', $article->id) }}"
-                                                        class="text-black-50 text-decoration-none text-bold">
-                                                        <strong>read more</strong>
-                                                    </a>
+
+
                                                 </p>
                                             </div>
                                             <hr>
+                                            <span>
+                                                <small class="text-dark main-color">Posted <span
+                                                        class="text-muted">{{ $article->created_at->diffForHumans() }}</span>
+                                                </small>
+                                                <br>
+
+                                            </span>
                                             <div class=" card-footer">
                                                 <div class="btn-group d-flex" role="group" aria-label="Basic example">
 
-                                                    <a href="{{ route('article.show', $article->id) }}"
+                                                    <a href="{{ route('article.show', $article->slug) }}"
                                                         class=" text-decoration-none ">
                                                         <button type="button" class="btn btn-outline-primary">
                                                             <i class="fa fa-eye"></i>
@@ -301,7 +249,7 @@
                                                     <ul class="dropdown-menu">
                                                         <li>
                                                             <a class="dropdown-item"
-                                                                href="{{ route('article.edit', $article->id) }}">
+                                                                href="{{ route('article.edit', $article->slug) }}">
                                                                 <i class="fas fa-edit" aria-hidden="true"></i> Edit
                                                             </a>
                                                         </li>
@@ -318,8 +266,6 @@
                                                     </ul>
 
                                                 </div>
-
-
 
                                             </div>
                                         </div>
@@ -388,7 +334,7 @@
                                         @enderror
                                     </div>
 
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <h5>Summarize your Article </h5>
                                         <textarea class="form-control  form-control-lg mb-3" id="" name="summary"
                                             placeholder="summarize article maximum of 200 charater" maxlength="200"
@@ -399,7 +345,7 @@
                                                 alert('{{ $message }}');
                                             </script>
                                         @enderror
-                                    </div>
+                                    </div> --}}
 
                                     <div class="form-group">
                                         <h5>Add display picture </h5>
@@ -418,12 +364,10 @@
 
                                     <div class="form-group">
                                         <h5>Who will see this Article </h5>
-                                        <select class="form-control form-control-lg mb-3" name="visibility"
-                                            id="visibility">
+                                        <select class="form-control form-control-lg mb-3" name="visibility" id="visibility">
                                             <option disabled selected>select your visibility</option>
                                             <option value="public">Public "Everybody" </option>
                                             <option value="followers">Only my Followers and Followings</option>
-                                            <option value="private">Private "Only me"</option>
                                         </select>
                                         @error('visibility')
                                             <div class="alert alert-danger mt-2 p-2">{{ $message }}</div>
@@ -461,7 +405,7 @@
 @endsection
 
 @section('script')
-    {{-- <script src="{{ asset('js/jquery.min.js') }}"></script> --}}
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('ckeditor/build/ckeditor.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('js/ajax.js') }}"></script>

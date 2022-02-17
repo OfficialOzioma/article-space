@@ -43,6 +43,7 @@
     </style>
 
     @yield('style')
+    @livewireStyles
 </head>
 
 <body>

@@ -62,6 +62,7 @@
 <script type="text/javascript" src="{{ asset('js/owl.carousel.min.js') }}"></script>
 
 @yield('script')
+@livewireScripts
 </body>
 
 </html>

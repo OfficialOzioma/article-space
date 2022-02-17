@@ -9,6 +9,7 @@
     <br />
     <br />
     <br />
+
     <div class="container-fluid">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -17,23 +18,28 @@
                         <div class="col d-flex align-items-stretch">
                             <div class="card shadow-sm">
 
-                                <img src="{{ url('uploads/thumbnails/'. $trend->thumbnail) }}" class="img-fluid" alt=""
-                                    sizes="" srcset="" />
+                                <img src="{{ url('uploads/thumbnails/' . $trend->thumbnail) }}" class="img-fluid"
+                                    alt="" sizes="" srcset="" />
+
                                 <div class="card-body d-flex flex-column">
                                     <hr />
                                     <p class=" card-title text-center">
                                         {{ $trend->title }}
                                     </p>
                                     <hr />
-                                    <p class="card-text text-justify">{{ $trend->summary }}</p>
+                                    <span>
+                                        <p class="card-text text-justify">
+                                            {!! Str::limit($trend->article, 200, '') !!}
+                                        </p>
+                                    </span>
 
                                 </div>
                                 <div class=" card-footer">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <a href="{{ route('article.show', $trend->id) }}">
+                                            <a href="{{ route('article.show', $trend->slug) }}">
                                                 <button type="button" class="btn btn-sm btn-outline-secondary">
-                                                    <i class="fa fa-eye"></i> View
+                                                    <i class="fa fa-eye"></i> Read
                                                 </button>
                                             </a>
                                             <button type="button" class="btn btn-sm btn-outline-primary">

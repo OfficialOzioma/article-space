@@ -61,6 +61,7 @@ Route::post('/profile/password/{username}', [
 ])->name('profile.password.update');
 
 Route::resource('/article', ArticleController::class);
+
 Route::post('/upload', [ImageController::class, 'upload'])->name('uplaod');
 Route::post('/comment/{id}', [CommentController::class, 'addComment'])->name(
     'comment'

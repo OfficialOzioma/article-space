@@ -34,21 +34,33 @@
                         <div class="col-lg-8 posts-list ">
                             {{-- @foreach ($findArticle as $article) --}}
                             <div class="single-post">
+                                <h1>
+                                    {{ $findArticle->title }}
+                                </h1>
+                                <ul class="blog-info-link mt-3 mb-4">
+                                    <small class="text-muted">
+                                        <li>Posted By &nbsp;
+                                            <a href="#">
+                                                <i class="fa fa-user"></i>
+                                                {{ $findArticle->user->name }}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fas fa-clock"></i>
+                                                {{ $findArticle->created_at->diffForHumans() }}
+                                            </a>
+                                        </li>
+                                    </small>
+
+                                </ul>
                                 <div class="feature-img">
-                                    <img class="img-fluid"
-                                        src="{{ url('uploads/thumbnails/'. $findArticle->thumbnail) }}">
+                                    <img class="img-fluid w-100"
+                                        src="{{ url('uploads/thumbnails/' . $findArticle->thumbnail) }}">
                                 </div>
                                 <div class="blog_details">
-                                    <h2>
-                                        {{ $findArticle->title }}
-                                    </h2>
-                                    <ul class="blog-info-link mt-3 mb-4">
-                                        <li><a href="#"><i class="fa fa-user"></i>{{ $findArticle->user->name }}</a>
-                                        </li>
-                                        <li><a href="#"><i
-                                                    class="fas fa-clock"></i>{{ $findArticle->created_at->diffForHumans() }}</a>
-                                        </li>
-                                    </ul>
+
+
                                     <div>
                                         <p class="lh-lg"> {!! $findArticle->article !!} </p>
                                     </div>
@@ -155,13 +167,13 @@
                                                     <div class="card-body border-0">
                                                         <div class="d-flex flex-start align-items-center">
                                                             <img class="rounded-circle shadow-1-strong me-3"
-                                                                src="{{ asset('images/work-2.jpg') }}" alt="avatar"
-                                                                width="60" height="60" />
+                                                                src="{{ url('uploads/profile_pictures/' . $user->settings->profile_pic) }}"
+                                                                alt="avatar" width="60" height="60" />
                                                             <div>
                                                                 <h6 class="fw-bold text-primary mb-1">
-                                                                    {{ $findArticle->user->name }}</h6>
+                                                                    {{ $user->name }}</h6>
                                                                 <p class="text-muted small mb-0">
-                                                                    <span class="badge bg-primary">author</span> -
+                                                                    <span class="badge bg-primary">user</span> -
                                                                     {{ $comments->created_at->diffForHumans() }}
                                                                 </p>
                                                             </div>
@@ -199,8 +211,8 @@
                                                         @csrf
                                                         <div class="d-flex flex-start w-100">
                                                             <img class="rounded-circle shadow-1-strong me-3"
-                                                                src="{{ asset('images/work-2.jpg') }}" alt="avatar"
-                                                                width="40" height="40" />
+                                                                src="{{ url('uploads/profile_pictures/' . $user->settings->profile_pic) }}"
+                                                                alt="avatar" width="40" height="40" />
                                                             <div class="form-outline w-100">
                                                                 <textarea class="form-control" id="textAreaExample"
                                                                     rows="5" name="comment"
@@ -227,7 +239,7 @@
                             <div class="blog_right_sidebar">
                                 <aside class="single_sidebar_widget search_widget">
                                     <div class="card" style="width: 18rem;">
-                                        <img src="{{ url('uploads/profile_pictures/'. $settings->profile_pic) }}"
+                                        <img src="{{ url('uploads/profile_pictures/' . $settings->profile_pic) }}"
                                             class="card-img-top img-fluid rounded-start" alt="..." style="heigh:auto;">
                                         <div class="card-body align-items-center">
                                             <div class="ml-3 w-100">

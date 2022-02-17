@@ -86,8 +86,8 @@
 
         <div class="container">
             <!--Section: Content-->
-            <section class="text-center p-5">
-                <h4 class="mb-5"><strong>Latest posts</strong></h4>
+            <section class="p-5 text-justify">
+                <h4 class="mb-5 text-center"><strong>Latest posts</strong></h4>
 
                 <div class="row">
                     @if (!empty($articles) && $articles->count())
@@ -96,38 +96,57 @@
                                 <div class="card border border-1">
                                     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                                         <img src="{{ url('uploads/thumbnails/' . $article->thumbnail) }}"
-                                            class="img-fluid" />
-                                        <a href="#!">
+                                            class="img-fluid w-100" />
+                                        <a href="{{ route('article.show', $article->slug) }}">
                                             <div class="mask"
                                                 style="background-color: rgba(251, 251, 251, 0.15);">
                                             </div>
                                         </a>
                                     </div>
+                                    <span class="p-2">
+                                        <small class="text-muted">
+                                            <small class="text-muted p-2">
+                                                <i class="fa fa-user"></i>
+                                                <span class="text-muted">
+                                                    {{ $article->user->name }}
+                                                </span>
+                                            </small>|
+                                            <small class="text-dark main-color">
+                                                <span class="text-muted">
+                                                    <i class="fas fa-clock"></i>
+                                                    {{ $article->created_at->diffForHumans() }}
+                                                </span>
+                                            </small>
+                                        </small>
+                                    </span>
+
                                     <div class="card-body d-flex flex-column">
-                                        <h5 class="card-title text-primary text-capitalize text-bold ">
-                                            <a href="{{ route('article.show', $article->id) }}" target="_blank"
+                                        <h5 class="card-title text-primary text-bold">
+                                            <a href="{{ route('article.show', $article->slug) }}" target="_blank"
                                                 rel="noopener noreferrer" class=" text-decoration-none">
                                                 {{ $article->title }}
                                             </a>
                                         </h5>
+
                                         <hr>
                                         <p class="card-text">
                                             <span class="text-justify">
-
-                                                {{ $article->summary }}
+                                                {!! Str::limit($article->article, 200, '...') !!}
+                                                <a href="{{ route('article.show', $article->slug) }}"
+                                                    class="text-black-50 text-decoration-none text-bold">
+                                                    <strong><i>Read more</i></strong>
+                                                </a>
                                             </span>
                                             <br />
-                                            <a href="{{ route('article.show', $article->id) }}"
-                                                class="text-black-50 text-decoration-none text-bold">
-                                                <strong>read more</strong>
-                                            </a>
+
                                         </p>
                                     </div>
                                     <hr>
+
                                     <div class=" card-footer">
                                         <div class="btn-group d-flex" role="group" aria-label="Basic example">
 
-                                            <a href="{{ route('article.show', $article->id) }}"
+                                            <a href="{{ route('article.show', $article->slug) }}"
                                                 class="btn btn-outline-primary">
                                                 {{-- <button type="button" class="btn btn-outline-primary"> --}}
                                                 <i class="fa fa-eye"></i> {{ $article->view->count() }}

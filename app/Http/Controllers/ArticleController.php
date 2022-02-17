@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 use App\Models\Article;
 use App\Models\View;
 use App\Models\Settings;
-
+use App\Models\User;
 
 class ArticleController extends Controller
 {
@@ -45,8 +46,7 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|unique:articles|max:100',
-            'summary' => 'required|max:200|min:3',
+            'title' => 'required|string|unique:articles|max:100|min:3',
             'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4048',
             'visibility' => 'required',
             'editor' => 'required',
@@ -63,9 +63,10 @@ class ArticleController extends Controller
         $article = Article::create([
             'user_id' => Auth::user()->id,
             'title' => $request->title,
-            'summary' => $request->summary,
+            'slug' => Str::slug($request->input('title'), '-'),
             'thumbnail' => $filename,
             'visibility' => $request->visibility,
+            'categories_id' => $request->categories_id = "1",
             'article' => $request->editor,
         ]);
 
@@ -104,15 +105,23 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        $findArticle = Article::where('id', $article->id)
+
+        $findArticle = Article::where('slug', $article->slug)
             ->with(['user', 'comments', 'like'])
-            ->firstOrFail();
+            ->first();
         $settings = Settings::find($findArticle->user->id);
+
+        $user = User::Where('id', Auth::user()->id)
+            ->with('settings')
+            ->firstOrFail();
 
         $numberOfComments = $findArticle->comments->count();
         $this->addView($article->id, Auth::user()->id);
 
-        return view('article.show', compact('findArticle', 'numberOfComments', 'settings'));
+        return view(
+            'article.show',
+            compact('findArticle', 'numberOfComments', 'settings', 'user')
+        );
     }
 
     /**
@@ -123,7 +132,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        $article = Article::findorfail($article->id);
+        $article = Article::where('slug', $article->slug)->first();
 
         return view('article.edit')->with('article', $article);
     }
@@ -141,7 +150,6 @@ class ArticleController extends Controller
         $data['user_id'] = Auth::user()->id;
         $request->validate([
             'title' => 'required|string|max:100',
-            'summary' => 'required|max:200|min:3',
             'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4048',
             'editor' => 'required',
         ]);
@@ -160,7 +168,7 @@ class ArticleController extends Controller
         }
 
         $data['title'] = $request->title;
-        $data['summary'] = $request->summary;
+        $data['slug'] = Str::slug($request->input('title'), '-');
         $data['article'] = $request->editor;
         // dd($data);
 
@@ -172,7 +180,7 @@ class ArticleController extends Controller
         }
         Session::flash('message', 'Article has been updated successfully !');
         Session::flash('alert-class', 'alert-success');
-        return redirect()->route('profile');
+        return redirect()->route('profile', Auth::user()->username);
     }
 
     /**

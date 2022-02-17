@@ -11,7 +11,7 @@
                 <img class="card-img-top" src="" alt="">
                 <div class="card-body">
 
-                    <form method="post" action="{{ route('article.update', $article->id) }}"
+                    <form method="post" action="{{ route('article.update', $article->slug) }}"
                         enctype="multipart/form-data">
                         @method('put')
                         @csrf
@@ -28,7 +28,7 @@
                             @enderror
                         </div>
 
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <h5>Summarize your Article </h5>
                             <textarea class="form-control  form-control-lg mb-3" id="" name="summary"
                                 placeholder="summarize article maximum of 200 charater" maxlength="200" minlength="3"
@@ -39,11 +39,11 @@
                                     alert('{{ $message }}');
                                 </script>
                             @enderror
-                        </div>
+                        </div> --}}
 
                         <div class="form-group">
                             <h5>Add display picture </h5>
-                            <img id="output" src="{{ url('uploads/thumbnails/'. $article->thumbnail) }}" width="400"
+                            <img id="output" src="{{ url('uploads/thumbnails/' . $article->thumbnail) }}" width="400"
                                 height="400" class=" d-flex mb-3" />
                             <input class="form-control form-control-lg mb-3" name="thumbnail" accept="image/*"
                                 id="formFileLg" type="file"

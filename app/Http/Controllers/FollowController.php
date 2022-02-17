@@ -14,10 +14,13 @@ class FollowController extends Controller
 
     public function followUserRequest(Request $request)
     {
-        $user = User::find($request->user_id);
-        $response = auth()
-            ->user()
-            ->toggleFollow($user);
+        $userFollowing = User::find($request->user_id);
+        $userFollowed = User::find(auth()->user()->id);
+        $response = $userFollowed->toggleFollow($userFollowing);
+
+        // $response = auth()
+        //     ->user()
+        //     ->toggleFollow($user);
 
         // if ($response) {
         //     dd($response);
@@ -25,7 +28,9 @@ class FollowController extends Controller
         //     dd('no');
         // }
 
-        // return redirect()->back();
+        dd($response);
+
+        return redirect()->back();
 
         return response()->json(['success' => $response]);
     }

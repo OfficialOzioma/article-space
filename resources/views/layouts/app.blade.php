@@ -2,8 +2,6 @@
 
 <!--Main layout-->
 <br />
-<br />
-<br />
 
 <div class="container-fluid">
     @yield('content')

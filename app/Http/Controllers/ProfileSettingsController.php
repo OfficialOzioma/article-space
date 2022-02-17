@@ -83,7 +83,7 @@ class ProfileSettingsController extends Controller
         if (Hash::check($request->current_password, $userPassword)) {
 
             $user->fill([
-               'password' => Hash::make($request->password),
+                'password' => Hash::make($request->password),
             ])->save();
 
             Session::flash('message', 'password successfully updated !');
@@ -95,6 +95,5 @@ class ProfileSettingsController extends Controller
         return back()->withErrors([
             'current_password' => 'Your current password is incorrect',
         ]);
-
     }
 }

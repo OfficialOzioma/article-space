@@ -21,8 +21,9 @@ class Article extends Model implements HasMedia
     protected $fillable = [
         'user_id',
         'title',
-        'summary',
+        'slug',
         'thumbnail',
+        'categories_id',
         'visibility',
         'article',
     ];
@@ -38,6 +39,16 @@ class Article extends Model implements HasMedia
     ];
 
     /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    /**
      *
      * Get the User that owns the Article.
      *
@@ -45,6 +56,16 @@ class Article extends Model implements HasMedia
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     *
+     * Get the User that owns the Article.
+     *
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 
     /**

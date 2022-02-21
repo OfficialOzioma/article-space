@@ -58,6 +58,7 @@
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 mr-5" style=" margin-right: 4%">
                 <li><a href="/home" class="nav-link px-2 link-secondary">Home</a></li>
+                <li><a href="{{ route('writer') }}" class="nav-link px-2 link-dark">Writers</a></li>
                 <li><a href="{{ route('trending') }}" class="nav-link px-2 link-dark">Trending</a></li>
                 <li><a href="{{ route('featured') }}" class="nav-link px-2 link-dark">Featured</a></li>
                 <li>

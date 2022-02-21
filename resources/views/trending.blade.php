@@ -13,7 +13,7 @@
     <div class="container-fluid">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                @if (!empty($trending))
+                @if (count($trending))
                     @foreach ($trending as $trend)
                         <div class="col d-flex align-items-stretch">
                             <div class="card shadow-sm">
@@ -55,7 +55,9 @@
                     @endforeach
 
                 @else
-                    No Trending Article and blog post
+                    <div align="center">
+                        No Trending Article and blog post
+                    </div>
                 @endif
 
 

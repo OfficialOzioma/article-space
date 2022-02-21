@@ -24,7 +24,7 @@ class TrendingController extends Controller
             ->selectRaw('articles.*, count(likes.article_id) as totalLike')
             ->groupBy('articles.id')
             ->get();
-
+        // dd(!count($trending) == 0);
         return view('trending', compact('trending'));
     }
 }

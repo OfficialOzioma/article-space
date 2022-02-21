@@ -7,39 +7,67 @@
 @section('content')
     <br />
     <br />
+    <style>
+        .user_img {
+            width: 100%;
+            height: 100%;
+
+            /*Scale down will take the necessary specified space that is 100px x 100px without stretching the image*/
+            object-fit: cover;
+
+        }
+
+    </style>
     <main>
         <div class="container py-4">
 
             <div class="p-5 mb-4 bg-light rounded-3">
                 <div class="container-fluid py-5">
-                    <h1 class="display-5 fw-bold">This feature is yet available</h1>
-                    <p class="col-md-8 fs-4">user.</p>
-                    <button class="btn btn-primary btn-lg" type="button">Example button</button>
+                    <h1 class="display-5 fw-bold" align="center">This are list of all our writers</h1>
                 </div>
+            </div>
+            <div class="row align-items-md-stretch">
+                @foreach ($users as $user)
+                    @if ($user->articles->count() > 0)
+                        <div class="col-md-6 mb-5">
+                            <div class="h-100 p-5 text-white bg-dark rounded-3">
+
+                                <div class="">
+                                    @if (!empty($user->settings))
+                                        <img src="{{ url('uploads/profile_pictures/' . $user->settings->profile_pic) }}"
+                                            class="user_img" />
+                                    @else
+                                        <img src="{{ asset('uploads/profile_pictures/default/user_icon2.jpg') }}"
+                                            class="user_img" />
+                                    @endif
+
+                                </div>
+
+                                <div class="clearfix mb-3 mt-3">
+                                    <span>
+                                        {{ $user->name }}
+                                    </span>
+                                    <span class="float-end price-hp"> Articles {{ $user->articles->count() }} </span>
+                                </div>
+                                @if (!empty($user->settings))
+                                    <p>{{ $user->settings->bio }}</p>
+                                @else
+                                    No Bio
+                                @endif
+
+                                <a href="{{ route('profile', $user->username) }}" class="btn btn-outline-light">View
+                                    Profile</a>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
             </div>
 
-            <div class="row align-items-md-stretch">
-                <div class="col-md-6">
-                    <div class="h-100 p-5 text-white bg-dark rounded-3">
-                        <h2>Change the background</h2>
-                        <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look.
-                            Then, mix and match with additional component themes and more.</p>
-                        <button class="btn btn-outline-light" type="button">Example button</button>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="h-100 p-5 bg-light border rounded-3">
-                        <h2>Add borders</h2>
-                        <p>Or, keep it light and add a border for some added definition to the boundaries of your content.
-                            Be sure to look under the hood at the source HTML here as we've adjusted the alignment and
-                            sizing of both column's content for equal-height.</p>
-                        <button class="btn btn-outline-secondary" type="button">Example button</button>
-                    </div>
-                </div>
-            </div>
+
+
 
             <footer class="pt-3 mt-4 text-muted border-top">
-                &copy; 2021
+                &copy; Article Space {{ date('Y') }}
             </footer>
         </div>
     </main>

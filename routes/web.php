@@ -75,6 +75,6 @@ Route::get('/featured', [FeaturedController::class, 'index'])->name('featured');
 
 Route::get('/trending', [TrendingController::class, 'index'])->name('trending');
 
-// Route::get('/writers', [WritersController::class, 'index'])->name('writer');
+Route::get('/writers', [WritersController::class, 'index'])->name('writer');
 
 // Route::get('/user/{id}', [UserController::class, 'show']);

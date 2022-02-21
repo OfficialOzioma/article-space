@@ -12,12 +12,12 @@
     <div class="container-fluid">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                @if (!empty($featured))
+                @if (count($featured))
                     @foreach ($featured as $feature)
                         <div class="col d-flex align-items-stretch">
                             <div class="card shadow-sm">
 
-                                <img src="{{ url('uploads/thumbnails/'. $feature->article->thumbnail) }}"
+                                <img src="{{ url('uploads/thumbnails/' . $feature->article->thumbnail) }}"
                                     class="img-fluid" alt="" sizes="" srcset="" />
                                 <div class="card-body">
                                     <hr />
@@ -50,7 +50,9 @@
                     @endforeach
 
                 @else
-                    No Featured Article and blog post
+                    <div align="center">
+                        No Featured Article and blog post
+                    </div>
                 @endif
 
 
